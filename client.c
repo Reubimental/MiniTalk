@@ -28,7 +28,7 @@ void	send_bit(int pid, char *str, size_t len)
 			else
 				kill(pid, SIGUSR1);
 			shift++;
-			usleep(300);
+			usleep(1000);
 		}
 		i++;
 	}

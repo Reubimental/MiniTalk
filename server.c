@@ -15,6 +15,7 @@ t_message	g_msg;
 
 void	bit_handler_zero()
 {
+	signal(SIGUSR1, bit_handler_zero);
 	g_msg.i++;
 	if (g_msg.i == 7)
 	{
@@ -28,7 +29,8 @@ void	bit_handler_zero()
 
 void	bit_handler_one()
 {
-	g_msg.c ^= 1 << g_msg.i;
+	signal(SIGUSR2, bit_handler_one);
+	g_msg.c ^= (1 << g_msg.i);
 	g_msg.i++;
 	if (g_msg.i == 7)
 	{
@@ -46,11 +48,11 @@ int	main(void)
 	if (g_msg.i){}
 	ft_printf("Welcome To My Server!\n");
 	ft_printf("My Server PID is: %d\n", getpid());
+	signal(SIGUSR2, bit_handler_one);
+	signal(SIGUSR1, bit_handler_zero);
 	while (1)
 	{
-		signal(SIGUSR2, bit_handler_one);
-		signal(SIGUSR1, bit_handler_zero);
-		sleep(10);
+		sleep(1);
 	}
 	return (0);
 }
