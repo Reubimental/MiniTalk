@@ -51,10 +51,6 @@ int	main(void)
 	signal(SIGUSR2, bit_handler_one);
 	signal(SIGUSR1, bit_handler_zero);
 	while (1)
-	{
-		sleep(1);
-	}
+		usleep(1000);
 	return (0);
 }
-
-// PID = Process Identifier
